@@ -24,14 +24,23 @@ export class PieChart extends HTMLElement {
     connectedCallback() {
         this.#content();
         setTimeout(() => {
-            const customUser = document.querySelector('custom-user-info')
-            let w = customUser.offsetWidth;
-            this.style.transform = `translateX(${w+100}px)`
+            const customUser = document.querySelector('body')
+            let w = customUser.offsetWidth/3;
+            this.style.transform = `translateX(${w}px)`
         }, 1000)
+
+        setTimeout(() => {
+            this.style.cssText += `border: 1px solid rgb(61, 106, 255);
+            padding: 10px;
+            border-radius: 30px;
+            background: #212121;
+            box-shadow: 15px 15px 30px rgb(25, 25, 25),
+                -15px -15px 30px rgb(60, 60, 60);`
+          }, 1500);
     }
 
     #content() {
-
+        this.innerHTML = `<h1>RATIO</h1>`
 
         makeGraphQLRequest(
             `{

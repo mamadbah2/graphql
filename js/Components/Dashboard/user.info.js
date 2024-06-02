@@ -24,7 +24,7 @@ export class CustomUser extends HTMLElement {
 
             let u = val.data.user[0]
             this.innerHTML = ` <div class="user-info-container">
-            <h1>USER INFOS</h1>
+            <h1>TALENT</h1>
             <div class="user-info">
                 <p><strong>Name:</strong> ${u.firstName + " " + u.lastName}</p>
                 <p><strong>Login:</strong> ${u.login} </p>

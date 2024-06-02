@@ -7,17 +7,23 @@ export class PointChart extends HTMLElement {
     this.info();
 
     setTimeout(() => {
-      const customUser = document.querySelector('custom-user-info')
-      const customPie = document.querySelector('pie-chart')
-      let wu = customUser.offsetWidth;
-      let wp = customPie.offsetWidth;
-      this.style.transform = `translateX(${wu + wp + 150}px)`;
-
+      const customUser = document.querySelector('body')
+      let wu = (customUser.offsetWidth * 2) / 3
+      this.style.transform = `translateX(${wu}px)`;
     }, 2000)
+    setTimeout(() => {
+      this.style.cssText += `border: 1px solid rgb(61, 106, 255);
+      padding: 10px;
+      border-radius: 30px;
+      background: #212121;
+      box-shadow: 15px 15px 30px rgb(25, 25, 25),
+          -15px -15px 30px rgb(60, 60, 60);`
+    }, 2500);
   }
 
   #content() {
-    this.innerHTML = `<div id="svgContainer">
+    this.innerHTML = `<h1>PROJECTS</h1>
+    <div id="svgContainer">
         <svg version="1.1"
              xmlns="http://www.w3.org/2000/svg"
              xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -78,7 +84,7 @@ export class PointChart extends HTMLElement {
         circle.setAttribute('fill', '#FF8300')
         circle.setAttribute('cx', `${(i * factor) + 15}`)
         circle.setAttribute('cy', `${cy + 15}`)
-        circle.setAttribute('r', '5')
+        circle.setAttribute('r', '7')
         const div = document.createElement('div')
         circle.addEventListener('mouseover', () => {
           div.classList.add('bulle')
