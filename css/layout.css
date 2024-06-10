@@ -1,0 +1,25 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+main {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-auto-flow: dense;
+    gap: 5px;
+    border: 1px solid #000;
+}
+main div {
+    border: 1px solid #000;
+}
+
+.layer_1 {
+    grid-row: 1/3;
+}
+
+.layer_6 {
+    grid-row: 2/4;
+    grid-column: 2/4;
+}

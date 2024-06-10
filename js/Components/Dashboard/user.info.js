@@ -20,12 +20,10 @@ export class CustomUser extends HTMLElement {
           }`;
 
         makeGraphQLRequest(query).then((val => {
-            console.log('val :>> ', val.data.user[0]);
 
             let u = val.data.user[0]
             this.innerHTML = ` <div class="user-info-container">
             <h1>TALENT</h1>
-            <div class="user-info">
                 <p><strong>Name:</strong> ${u.firstName + " " + u.lastName}</p>
                 <p><strong>Login:</strong> ${u.login} </p>
                 <p><strong>Email:</strong> ${u.email} </p>
@@ -35,7 +33,7 @@ export class CustomUser extends HTMLElement {
                 <p><strong>Nationality:</strong> ${u.attrs.nationality1}</p>
                 <p><strong>Gender:</strong> ${u.attrs.gender}</p>
                 <p><strong>Year Experience:</strong> ${u.attrs.yearexp}</p>
-            </div>
+            
         </div>`
 
         }));

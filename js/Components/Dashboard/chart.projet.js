@@ -4,21 +4,7 @@ export class PointChart extends HTMLElement {
 
   connectedCallback() {
     this.#content();
-    this.info();
-
-    setTimeout(() => {
-      const customUser = document.querySelector('body')
-      let wu = (customUser.offsetWidth * 2) / 3
-      this.style.transform = `translateX(${wu}px)`;
-    }, 2000)
-    setTimeout(() => {
-      this.style.cssText += `border: 1px solid rgb(61, 106, 255);
-      padding: 10px;
-      border-radius: 30px;
-      background: #212121;
-      box-shadow: 15px 15px 30px rgb(25, 25, 25),
-          -15px -15px 30px rgb(60, 60, 60);`
-    }, 2500);
+    this.#info();
   }
 
   #content() {
@@ -51,7 +37,7 @@ export class PointChart extends HTMLElement {
 
   }
 
-  info() {
+  #info() {
 
     const g = document.querySelector('g')
     const svg = document.querySelector('#svgContainer')
@@ -64,7 +50,6 @@ export class PointChart extends HTMLElement {
               }
             }
           }`).then(val => {
-      console.log('val.data.user[0] :>> ', val.data.user[0].xps);
       const everyProject = val.data.user[0].xps
 
       let amountTab = []

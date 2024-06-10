@@ -13,7 +13,7 @@ export class CustomLogin extends HTMLElement {
                     <p>Incorrects Fields</p>
                     <input type="text" id="username" class="input" placeholder="Username">
                     <input type="password" id="password" class="input" placeholder="Password">
-                    <div class="btn">Let's go</div>
+                    <input type="button" value="Let's go" class="btn">
                     <span class="switch">Welcome, would you 
                         <label for="signup_toggle" class="signup_tog">
                             Reverse login
