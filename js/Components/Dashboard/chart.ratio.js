@@ -1,8 +1,5 @@
-import { makeGraphQLRequest } from "../../Services/gql.request.js";
-
-function strToDom(str) {
-    return document.createRange().createContextualFragment(str).firstChild;
-}
+import { makeGraphQLRequest } from "../../Utils/gql.request.js";
+import { strToDom } from "../../Utils/utils.js";
 
 class Point {
     constructor(x, y) {
@@ -36,10 +33,13 @@ export class PieChart extends HTMLElement {
                 }
               }`
         ).then(val => {
-            // const shadow = this.attachShadow({ mode: 'open' });
-            const colors = ['#FAAA32', '#3EFA7D', '#F6A625', '#0C94FA', '#FA1F19', '#0CFAE2', '#AB6D23'];
+            const colors = ['#FAAA32', '#3EFA7D', '#F6A625'];
             this.data = Object.values(val.data.user[0]);
             const svg = strToDom(`<svg viewBox="-1 -1 2 2"></svg>`);
+            // Responsivité
+            let layerW = this.parentElement.clientWidth; let layerH = this.parentElement.clientHeight; const downHeight =120
+            svg.style.width = (layerW>layerH) ? (layerH-downHeight)+"px":(layerW-downHeight)+"px"
+            svg.style.height = svg.style.width
 
             // On crée les chemins
             this.path = this.data.map((_, k) => {
@@ -54,6 +54,7 @@ export class PieChart extends HTMLElement {
             });
             this.appendChild(svg);
             this.#draw();
+            this.#addLegend()
         })
     }
 
@@ -74,14 +75,17 @@ export class PieChart extends HTMLElement {
             this.path[i].setAttribute("d", p);
             start = end;
         }
+    }
+
+    #addLegend() {
         this.innerHTML += ` <div>
         <div id="up">
             <span></span>
-            up
+            Done -> ${(this.data[0] + "").slice(0, -3)}k
         </div>
         <div id="down">
             <span></span>
-            down
+            Received -> ${(this.data[1] + "").slice(0, -3)}k
         </div>
     </div>`
     }

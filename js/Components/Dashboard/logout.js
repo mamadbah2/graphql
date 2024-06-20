@@ -1,4 +1,4 @@
-import { start } from "../../Services/session.js"
+import { start } from "../../Utils/session.js"
 
 export class customLogout extends HTMLElement {
     connectedCallback() {

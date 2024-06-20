@@ -29,7 +29,7 @@ main {
 }
 
 .form .form_front {
-    border: 1px solid rgb(61, 106, 255);
+    border: 1px solid #FAAA32;
 
     display: flex;
     flex-direction: column;
@@ -52,6 +52,7 @@ main {
 }
 
 .form .form_back {
+    border: 1px solid #3EFA7D;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -83,7 +84,7 @@ main {
     background-color: #212121;
     border-radius: 6px;
     border: 2px solid #212121;
-    border: 1px solid rgb(61, 106, 255);
+    border: 1px solid #3EFA7D;
 
     /* box-shadow: 6px 6px 10px rgba(0, 0, 0, 1),
         1px 1px 10px rgba(255, 255, 255, 0.6); */
@@ -112,7 +113,7 @@ main {
     background-color: #212121;
     border-radius: 6px;
     border: 2px solid #212121;
-    border: 1px solid rgb(61, 106, 255);
+    border: 1px solid #3EFA7D;
 
     /* box-shadow: 6px 6px 10px rgba(0, 0, 0, 1),
         1px 1px 10px rgba(255, 255, 255, 0.6); */
@@ -217,6 +218,8 @@ h1 {
 custom-user-info p {
     margin: 5px;
     color: #faaa32;
+    white-space: nowrap;
+    overflow-x: scroll;
 }
 
 custom-user-info strong {
@@ -247,8 +250,11 @@ custom-user-info strong {
     background-color: #3EFA7D;
 }
 
-#svgContainer {
-    display: flex;
+#svgContainer .bulle {
+    /* display: flex; */
+    position: absolute;
+    top: 50px;
+    right: 0;
 }
 
 pie-chart {
@@ -261,37 +267,33 @@ point-chart {
     position: relative;
     background: radial-gradient(circle 280px at 0% 0%, #444444, #212121);
     transition: all .7s;
+    z-index: 10;
     width: 100%;
 }
 
 stick-chart {
     position: relative;
-    margin-left: 15px;
     width: 100%;
-    z-index: 10;
-    padding: 10px;
     border-radius: 30px;
-    box-shadow: 15px 15px 30px rgb(25, 25, 25),
-        -15px -15px 30px rgb(60, 60, 60);
 }
 
 pie-chart svg {
     display: block;
     margin: auto;
-    width: 150px;
-    height: 150px;
 }
 
 point-chart svg {
     display: block;
-    margin: auto;
-    width: 400px;
+    margin: 10px auto;
+}
+
+stick-chart h1 {
+    margin: 10px 0;
 }
 
 stick-chart svg {
     display: block;
     margin: auto;
-    width: 400px;
     height: 270px;
 }
 
@@ -299,27 +301,57 @@ stick-chart svg rect {
     fill: #FAAA32;
 }
 
+#libelle {
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+#libelle span {
+    display: inline-block;
+    writing-mode: vertical-lr;
+    font-size: .9em;
+    padding: 0;
+    margin: 0;
+}
 
 .bulle {
-    z-index: 1000;
+    z-index: 11;
     position: absolute;
     bottom: 0;
     top: 0;
-    background-color: beige;
+    background-color: #212121;
+    box-shadow: #999 1px -1px 7px;
     padding: 10px;
     margin-left: 10px;
     width: 200px;
     height: fit-content;
-    color: #030303;
+    color: #FAAA32;
     font-size: .8em;
     border-radius: 10px;
+    overflow: hidden;
+    animation: bulleAnimate 300ms ease-out;
+}
+
+.bulle strong {
+    color: #3EFA7D;
+}
+
+@keyframes bulleAnimate {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 #logout {
     position: relative;
     padding: 10px 20px;
     border-radius: 7px;
-    border: 1px solid rgb(61, 106, 255);
+    border: 1px solid #3EFA7D;
     font-size: 14px;
     text-transform: uppercase;
     font-weight: 600;
@@ -334,8 +366,8 @@ stick-chart svg rect {
 }
 
 #logout:hover {
-    background: rgb(61, 106, 255);
-    box-shadow: 0 0 30px 5px rgba(0, 142, 236, 0.815);
+    background: #faaa32;
+    box-shadow: 0 0 30px 5px #faaa32cc;
     -webkit-transition: all 0.2s ease-out;
     -moz-transition: all 0.2s ease-out;
     transition: all 0.2s ease-out;
@@ -386,6 +418,14 @@ stick-chart svg rect {
     -webkit-transition: box-shadow 0.2s ease-in;
     -moz-transition: box-shadow 0.2s ease-in;
     transition: box-shadow 0.2s ease-in;
+}
+
+#up {
+    margin-top: 10px;
+}
+
+#up, #down {
+    margin-left: 5px;
 }
 
 #up span {
@@ -509,3 +549,16 @@ stick-chart svg rect {
     height: 100%;
 }
 /*ENNNNDDDDD card for level and for xp  */
+
+custom-logo img {
+    display: block;
+    margin: auto;
+}
+
+custom-logout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}

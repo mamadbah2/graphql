@@ -4,9 +4,10 @@ import { CustomDash } from "./Components/Dashboard/dashboard.js";
 import { customLogout } from "./Components/Dashboard/logout.js";
 import { CustomUser } from "./Components/Dashboard/user.info.js";
 import { CustomLogin } from "./Components/Connexion/login.js";
-import { start } from "./Services/session.js";
+import { start } from "./Utils/session.js";
 import { StickChart } from "./Components/Dashboard/chart.skills.js";
 import { CustomLevel, CustomXP } from "./Components/Dashboard/level.xp.js";
+import { CustomLogo } from "./Components/Dashboard/logo.js";
 
 customElements.define('custom-login', CustomLogin); 
 customElements.define('custom-dashboard', CustomDash);
@@ -16,6 +17,7 @@ customElements.define('point-chart', PointChart);
 customElements.define('stick-chart', StickChart);
 customElements.define('custom-level', CustomLevel);
 customElements.define('custom-xp', CustomXP);
+customElements.define('custom-logo', CustomLogo)
 customElements.define('custom-logout', customLogout);
 
 document.addEventListener('DOMContentLoaded', start);

@@ -1,4 +1,5 @@
-import { makeGraphQLRequest } from "../../Services/gql.request.js";
+import { makeGraphQLRequest } from "../../Utils/gql.request.js";
+import { strToDom } from "../../Utils/utils.js";
 
 export class PointChart extends HTMLElement {
 
@@ -10,27 +11,15 @@ export class PointChart extends HTMLElement {
   #content() {
     this.innerHTML = `<h1>PROJECTS</h1>
     <div id="svgContainer">
-        <svg version="1.1"
-             xmlns="http://www.w3.org/2000/svg"
-             xmlns:xlink="http://www.w3.org/1999/xlink"
-             xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
-             x="0px" y="0px" viewBox="0 0 741 450"
-             enable-background="new 0 0 741 450"
-             xml:space="preserve"
-             transform="scale(1, -1)">
+        <svg transform="scale(1, -1)">
           
             <!-- Modification des lignes pour démontrer le système de coordonnées -->
-            <line fill="none" stroke="#4AC900" stroke-width="4" stroke-miterlimit="10" x1="0" y1="10" x2="740" y2="10"/>
+            <line fill="none" stroke="#3EFA7D" stroke-width="3" stroke-miterlimit="10" x1="0" y1="3" x2="740" y2="3"/>
             
             <g>
               <!-- Modification des cercles pour aligner avec les lignes -->
               
             </g>
-            
-            <!-- Modification du chemin pour clarifier les lignes verticales et horizontales -->
-            <path id="graph-measurement" fill="none" stroke="#741E00" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-              M10,127H731 M10,127v-18 M113,127v-9.1 M731,109v18 M216,127v-9.1 M319,127v-9.1 M422,127v-9.1 M525,127v-9.1 M628,127v-9.1" 
-              transform="translate(0, -120)"/>
         </svg>
     </div>
     `;
@@ -40,7 +29,7 @@ export class PointChart extends HTMLElement {
   #info() {
 
     const g = document.querySelector('g')
-    const svg = document.querySelector('#svgContainer')
+    const svg = document.querySelector('#svgContainer svg')
     makeGraphQLRequest(`{
             user {
               xps (where:  {path: {_regex: "/[^/]+/div-01+/[^/]+$"}})  
@@ -51,40 +40,44 @@ export class PointChart extends HTMLElement {
             }
           }`).then(val => {
       const everyProject = val.data.user[0].xps
+      this.nbProject = everyProject.length
 
       let amountTab = []
-      for (let i = 0; i < everyProject.length; i++) {
+      for (let i = 0; i < this.nbProject; i++) {
         const p = everyProject[i];
-        amountTab.push(p.amount + 5)
+        amountTab.push(p.amount)
       }
 
       let max = Math.max(...amountTab)
       everyProject.sort((a, b) => a.amount - b.amount);
-      console.log('everyProject :>> ', everyProject);
-      for (let i = 0; i < everyProject.length; i++) {
+
+      let layerW = this.parentElement.clientWidth; let r = 4
+      let layerH = this.parentElement.clientHeight
+      let factor = layerW / 11
+      console.log('layerH :>> ', layerH);
+      const downHeight = 10
+      // svg.style.width = (layerW > layerH) ? (layerH - downHeight) + "px" : (layerW - downHeight) + "px"
+      svg.style.width = '95%'
+      const betaDiv = strToDom('<div class="bulle"><p><strong>Path</strong> : Hover dot </p><p><strong>Amount</strong> : Hover dot</p></div>')
+      svg.parentElement.appendChild(betaDiv)
+      for (let i = this.nbProject - 11; i < this.nbProject; i++) {
         const p = everyProject[i];
-        let cy = (p.amount / max) * 450
-        let factor = 741 / everyProject.length
+        let cy = (p.amount / max) * (svg.clientHeight - r)
         const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle')
-        circle.setAttribute('fill', '#FF8300')
-        circle.setAttribute('cx', `${(i * factor) + 15}`)
-        circle.setAttribute('cy', `${cy + 15}`)
-        circle.setAttribute('r', '7')
-        const div = document.createElement('div')
+        circle.setAttribute('fill', '#faaa32')
+        circle.setAttribute('cx', `${((this.nbProject - i) * factor)}`)
+        circle.setAttribute('cy', `${cy}`)
+        circle.setAttribute('r', r)
+        // const div = document.createElement('div')
         circle.addEventListener('mouseover', () => {
-          div.classList.add('bulle')
-          div.innerHTML = `<p><strong>Path</strong> : ${p.path}</p>
+          // div.classList.add('bulle')
+          betaDiv.innerHTML = `<p><strong>Path</strong> : ${p.path}</p>
                     <p><strong>Amount</strong> : ${p.amount} xp</p>`
-          svg.appendChild(div)
-        })
-        circle.addEventListener('mouseout', () => {
-          div.classList.remove('bulle')
-          svg.removeChild(div)
+          // svg.parentElement.appendChild(div)
         })
         g.appendChild(circle)
         // g.innerHTML += `<circle fill="#FF8300" cx="${(i*factor)+15}" cy="${cy+15}" r="5"/>`
       }
-
     })
   }
 }
