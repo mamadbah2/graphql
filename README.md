@@ -67,3 +67,6 @@ Ce projet prend des données d'une API GraphQL et les affiche sur une interface 
    git clone <url-du-dépôt>
 
 2. Lancer le Live Server
+
+## Hebergement
+lien d'hebergement : https://graphql-mamadbah.netlify.app
