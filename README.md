@@ -6,38 +6,40 @@ Ce projet prend des données d'une API GraphQL et les affiche sur une interface 
 
 ## Structure des fichiers
 
-.
-├── css
-│   ├── layout.css
-│   └── main.css
-├── img
-│   ├── logo_z01.png
-│   ├── logo_z01_square.png
-│   ├── logo_z01_squ_rmbg.png
-│   ├── logo_zone01.png
-│   └── logo_zone.svg
-├── index.html
-├── js
-│   ├── app.js
-│   ├── Components
-│   │   ├── Connexion
-│   │   │   └── login.js
-│   │   └── Dashboard
-│   │       ├── chart.projet.js
-│   │       ├── chart.ratio.js
-│   │       ├── chart.skills.js
-│   │       ├── dashboard.js
-│   │       ├── level.xp.js
-│   │       ├── logo.js
-│   │       ├── logout.js
-│   │       └── user.info.js
-│   └── Utils
-│       ├── gql.request.js
-│       ├── session.js
-│       └── utils.js
-├── layout.html
-├── README.md
-└── todo
+    ```bash
+    .
+    ├── css
+    │   ├── layout.css
+    │   └── main.css
+    ├── img
+    │   ├── logo_z01.png
+    │   ├── logo_z01_square.png
+    │   ├── logo_z01_squ_rmbg.png
+    │   ├── logo_zone01.png
+    │   └── logo_zone.svg
+    ├── index.html
+    ├── js
+    │   ├── app.js
+    │   ├── Components
+    │   │   ├── Connexion
+    │   │   │   └── login.js
+    │   │   └── Dashboard
+    │   │       ├── chart.projet.js
+    │   │       ├── chart.ratio.js
+    │   │       ├── chart.skills.js
+    │   │       ├── dashboard.js
+    │   │       ├── level.xp.js
+    │   │       ├── logo.js
+    │   │       ├── logout.js
+    │   │       └── user.info.js
+    │   └── Utils
+    │       ├── gql.request.js
+    │       ├── session.js
+    │       └── utils.js
+    ├── layout.html
+    ├── README.md
+    └── todo
+    ```
 
 
 ## Détails des fichiers
