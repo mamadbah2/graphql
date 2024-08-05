@@ -1,5 +1,5 @@
 import { makeGraphQLRequest } from "../../Utils/gql.request.js";
-
+import { start } from "../../Utils/session.js"
 
 
 export class CustomUser extends HTMLElement {
@@ -35,7 +35,11 @@ export class CustomUser extends HTMLElement {
             
         </div>`
 
-        }));
+        })).catch((reason) => {
+            console.log('reason :>> ', reason);
+            localStorage.removeItem('jwtToken')
+            start()
+        });
 
     }
 }
