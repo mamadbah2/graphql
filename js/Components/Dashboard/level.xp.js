@@ -47,9 +47,9 @@ export class CustomLevel extends LevelXP {
 
 export class CustomXP extends LevelXP {
   _info() {
-    makeGraphQLRequest(`{
+    /* makeGraphQLRequest(`{
           user {
-            transactions(order_by: {amount: desc, type: asc}, where: {type: {_like : "xp%"} _and: {path: {_regex: "/[^/]+/div-01+/[^/]+$"} }}) {
+            transactions(order_by: {amount: desc, type: asc}, where: {type: {_like : "xp%"} _and: {path: {_regex: "/[^/]+/div-01(/checkpoint)?/[^/]+$"} }}) {
               type
               amount
               path
@@ -65,6 +65,19 @@ export class CustomXP extends LevelXP {
       let amount = levels.reduce((acc, lev)=> acc+lev.amount, 0) + ""
       divCounter.textContent = amount.slice(0, -3) + 'k'
       title.textContent = `${levels[0].type.toUpperCase()}`
+    }) */
+
+      makeGraphQLRequest(`{
+        user {
+          auditRatio
+        }
+    }`).then(val => {
+      const divCounter = this.querySelector('.text')
+      let ratio = val.data.user[0].auditRatio
+      divCounter.textContent = (ratio).toFixed(1)
+
+      const title = this.querySelector('h1')
+      title.textContent = 'RATIO'
     })
   }
 }

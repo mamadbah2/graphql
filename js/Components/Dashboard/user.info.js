@@ -27,7 +27,6 @@ export class CustomUser extends HTMLElement {
                 <p><strong>Name:</strong> ${u.firstName + " " + u.lastName}</p>
                 <p><strong>Login:</strong> ${u.login} </p>
                 <p><strong>Email:</strong> ${u.email} </p>
-                <p><strong>Audit Ratio:</strong> ${(u.auditRatio).toFixed(2)}</p>
                 <p><strong>Age:</strong> ${u.attrs.age}</p>
                 <p><strong>City:</strong> ${u.attrs.city}</p>
                 <p><strong>Nationality:</strong> ${u.attrs.nationality1}</p>

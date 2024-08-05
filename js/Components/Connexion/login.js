@@ -32,7 +32,10 @@ export class CustomLogin extends HTMLElement {
             const main = document.querySelector('body main')
             const usernameEmail = document.getElementById('username').value;
             const password = document.getElementById('password').value;
-            const credentials = btoa(`${usernameEmail}:${password}`);
+
+            const utf = new TextEncoder().encode(`${usernameEmail}:${password}`)
+
+            const credentials = btoa(String.fromCharCode(...utf));
 
             try {
                 const response = await fetch('https://learn.zone01dakar.sn/api/auth/signin', {
